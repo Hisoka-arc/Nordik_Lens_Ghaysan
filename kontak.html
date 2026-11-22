@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontak — Nordik Lens</title>
+  <link rel="stylesheet" href="css/ghaysan_style.css" />
+</head>
+<body>
+  <header id="ghaysan_header">
+    <div class="ghaysan_container">
+      <nav id="ghaysan_navbar">
+        <a href="index.html" class="ghaysan_logo">
+          <img src="assets/img/logo_nordik.jpg" alt="Logo Nordik Lens" class="ghaysan_logo_img" />
+          <span>NORDIK <strong>LENS</strong></span>
+        </a>
+        <button type="button" id="ghaysan_toggle_menu" aria-label="Buka Menu">&#9776;</button>
+        <ul class="ghaysan_menu">
+          <li><a href="index.html" class="ghaysan_link"><span class="nav-icon">&#8962;</span> Beranda</a></li>
+          <li><a href="tentang.html" class="ghaysan_link"><span class="nav-icon">&#8505;</span> Tentang</a></li>
+          <li><a href="layanan.html" class="ghaysan_link"><span class="nav-icon">&#11041;</span> Layanan</a></li>
+          <li><a href="portofolio.html" class="ghaysan_link"><span class="nav-icon">&#10063;</span> Portofolio</a></li>
+          <li><a href="tim.html" class="ghaysan_link"><span class="nav-icon">&#9778;</span> Tim</a></li>
+          <li><a href="paket.html" class="ghaysan_link"><span class="nav-icon">&#9636;</span> Paket</a></li>
+          <li><a href="kontak.html" class="ghaysan_link ghaysan_link_aktif"><span class="nav-icon">&#9993;</span> Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="ghaysan_section">
+    <div class="ghaysan_container">
+      <div class="ghaysan_judul_bagian">
+        <span class="ghaysan_badge">Hubungi Kami</span>
+        <h2>Kirim Pesan kepada Nordik Lens</h2>
+        <p>
+          Sampaikan kebutuhan layanan satuan, pilihan paket, atau jadwal diskusi melalui formulir di bawah ini.
+        </p>
+      </div>
+
+      <div class="ghaysan_grid_2 ghaysan_kontak_grid">
+        <div class="ghaysan_form_box">
+          <form id="ghaysan_form_kontak" novalidate>
+            <div class="ghaysan_form_grup">
+              <label for="ghaysan_nama">Nama Lengkap</label>
+              <input type="text" id="ghaysan_nama" class="ghaysan_input" placeholder="Masukkan nama Anda" required />
+            </div>
+
+            <div class="ghaysan_form_grup">
+              <label for="ghaysan_email">Alamat Email</label>
+              <input type="email" id="ghaysan_email" class="ghaysan_input" placeholder="nama@email.com" required />
+            </div>
+
+            <div class="ghaysan_form_grup">
+              <label for="ghaysan_layanan">Pilihan Layanan Satuan / Paket</label>
+              <select id="ghaysan_layanan" class="ghaysan_select">
+                <option value="Layanan Satuan: Fotografi Komersial">Layanan Satuan: Fotografi Komersial (Mulai Rp950.000)</option>
+                <option value="Layanan Satuan: Produksi Video &amp; Konten">Layanan Satuan: Produksi Video &amp; Konten (Mulai Rp1.350.000)</option>
+                <option value="Layanan Satuan: Desain Antarmuka &amp; Web">Layanan Satuan: Desain Antarmuka &amp; Web (Mulai Rp2.200.000)</option>
+                <option value="Paket Visual Starter">Paket Visual Starter (Rp1.500.000)</option>
+                <option value="Paket Brand &amp; Web">Paket Brand &amp; Web (Rp3.500.000)</option>
+                <option value="Paket Full Studio">Paket Full Studio (Rp6.000.000)</option>
+              </select>
+            </div>
+
+            <div class="ghaysan_form_grup">
+              <label for="ghaysan_pesan">Isi Pesan</label>
+              <textarea id="ghaysan_pesan" rows="5" class="ghaysan_textarea" placeholder="Tuliskan detail pesan atau kebutuhan proyek Anda..." required></textarea>
+            </div>
+
+            <button type="submit" class="ghaysan_btn_utama">Kirim Pesan</button>
+            <p id="ghaysan_status_pesan" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <aside class="ghaysan_kontak_sidebar">
+          <article class="ghaysan_card">
+            <div class="ghaysan_foto_frame">
+              <img src="assets/img/tentang_studio2.jpg" alt="Suasana diskusi dan ruang kerja kreatif Nordik Lens" />
+            </div>
+            <div class="ghaysan_card_body">
+              <h3>Informasi Studio Nordik Lens</h3>
+              <ul class="ghaysan_kontak_list">
+                <li><strong>Studio:</strong> Jl. Pasir Kaliki No. 142, Bandung</li>
+                <li><strong>Email:</strong> halo@nordiklens.example</li>
+                <li><strong>Telepon / WhatsApp:</strong> +62 812-3456-7890</li>
+                <li><strong>Jam Operasional:</strong> Senin &ndash; Sabtu, 09.00 &ndash; 17.00 WIB</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="ghaysan_card ghaysan_kontak_catatan">
+            <div class="ghaysan_card_body">
+              <h3>Alur Respon &amp; Diskusi</h3>
+              <p style="margin-bottom: 12px;">
+                Pesan yang masuk akan ditinjau pada jam operasional untuk menyesuaikan jadwal sesi, konsep visual, maupun cakupan halaman web.
+              </p>
+              <div class="ghaysan_kontak_tautan">
+                <a href="paket.html">Bandingkan Paket</a>
+                <span>&middot;</span>
+                <a href="portofolio.html">Cek 15 Portofolio</a>
+              </div>
+            </div>
+          </article>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer id="ghaysan_footer">
+    <div class="ghaysan_container">
+      <div class="ghaysan_footer_isi">
+        <div><strong>Nordik Lens</strong> &mdash; Studio Visual &amp; Solusi Kreatif</div>
+        <div>&copy; 2026 Nordik Lens. Dikembangkan oleh Ghaysan.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/ghaysan_script.js"></script>
+</body>
+</html>
