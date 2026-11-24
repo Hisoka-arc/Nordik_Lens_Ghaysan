@@ -1,16 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
   // 1. Toggle menu navigasi mobile
-  const tombolMenu = document.getElementById("ghaysan_btn_menu");
-  const daftarNav = document.getElementById("ghaysan_nav_list");
+  const tombolMenu =
+    document.getElementById("ghaysan_toggle_menu") ||
+    document.getElementById("ghaysan_btn_menu");
+  const daftarNav =
+    document.getElementById("ghaysan_nav_list") ||
+    document.querySelector(".ghaysan_menu");
 
   if (tombolMenu && daftarNav) {
     tombolMenu.addEventListener("click", function () {
-      const sedangBuka = daftarNav.classList.toggle("buka");
+      const sedangBuka = daftarNav.classList.toggle("ghaysan_menu_buka");
+      daftarNav.classList.toggle("buka", sedangBuka);
       tombolMenu.setAttribute("aria-expanded", sedangBuka ? "true" : "false");
     });
 
     daftarNav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
+        daftarNav.classList.remove("ghaysan_menu_buka");
         daftarNav.classList.remove("buka");
         tombolMenu.setAttribute("aria-expanded", "false");
       });
@@ -18,7 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 2. Filter kategori portofolio
-  const tombolFilter = document.querySelectorAll(".ghaysan_btn_filter");
+  const tombolFilter = document.querySelectorAll(
+    ".ghaysan_btn_filter, .ghaysan_filter_btn"
+  );
   const itemPorto = document.querySelectorAll(".ghaysan_porto_item");
   const counterPorto = document.getElementById("ghaysan_porto_counter");
 
@@ -29,13 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         tombolFilter.forEach(function (b) {
           b.classList.remove("aktif");
+          b.classList.remove("ghaysan_filter_aktif");
         });
         btn.classList.add("aktif");
+        btn.classList.add("ghaysan_filter_aktif");
 
         let jumlahTampil = 0;
         itemPorto.forEach(function (item) {
           const kategoriItem = item.getAttribute("data-kategori");
-          const cocok = kategoriDipilih === "semua" || kategoriItem === kategoriDipilih;
+          const cocok =
+            kategoriDipilih === "semua" || kategoriItem === kategoriDipilih;
           item.style.display = cocok ? "flex" : "none";
           if (cocok) {
             jumlahTampil += 1;
@@ -43,7 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (counterPorto) {
-          counterPorto.textContent = "Menampilkan " + jumlahTampil + " dari " + itemPorto.length + " proyek";
+          counterPorto.textContent =
+            "Menampilkan " + jumlahTampil + " dari " + itemPorto.length + " proyek";
         }
       });
     });
@@ -54,7 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalImg = document.getElementById("ghaysan_modal_img");
   const modalVideo = document.getElementById("ghaysan_modal_video");
   const tombolDetail = document.querySelectorAll(".ghaysan_btn_detail");
-  const tombolTutupModal = document.querySelectorAll("[data-tutup-modal]");
+  const tombolTutupModal = document.querySelectorAll(
+    "[data-tutup-modal], .ghaysan_modal_tutup"
+  );
 
   const elJudul = document.getElementById("ghaysan_modal_judul");
   const elDeskripsi = document.getElementById("ghaysan_modal_deskripsi");
@@ -67,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
       modalVideo.pause();
       modalVideo.currentTime = 0;
       modalVideo.removeAttribute("src");
+      modalVideo.removeAttribute("poster");
       modalVideo.load();
       modalVideo.style.display = "none";
     }
@@ -97,7 +112,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (tipe === "video") {
       const srcVideo = btn.getAttribute("data-video") || "";
+      const posterVideo = btn.getAttribute("data-gambar") || "";
       if (modalVideo && srcVideo) {
+        if (posterVideo) {
+          modalVideo.setAttribute("poster", posterVideo);
+        }
         modalVideo.style.display = "block";
         modalVideo.src = srcVideo;
         modalVideo.load();
@@ -112,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
+    modalPorto.classList.add("ghaysan_modal_buka");
     modalPorto.classList.add("aktif");
     modalPorto.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
@@ -120,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function tutupModal() {
     if (!modalPorto) return;
     resetMediaModal();
+    modalPorto.classList.remove("ghaysan_modal_buka");
     modalPorto.classList.remove("aktif");
     modalPorto.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
@@ -139,8 +160,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  if (modalPorto) {
+    modalPorto.addEventListener("click", function (event) {
+      if (event.target === modalPorto) {
+        tutupModal();
+      }
+    });
+  }
+
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && modalPorto && modalPorto.classList.contains("aktif")) {
+    if (
+      event.key === "Escape" &&
+      modalPorto &&
+      (modalPorto.classList.contains("ghaysan_modal_buka") ||
+        modalPorto.classList.contains("aktif"))
+    ) {
       tutupModal();
     }
   });
@@ -159,27 +193,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (layananParam.includes("foto")) {
       nilaiTerpilih = "Fotografi Komersial";
-      teksAwalPesan = "Halo Nordik Lens, saya ingin menanyakan detail layanan Fotografi Komersial.";
+      teksAwalPesan =
+        "Halo Nordik Lens, saya ingin menanyakan detail layanan Fotografi Komersial.";
     } else if (layananParam.includes("video")) {
       nilaiTerpilih = "Produksi Video & Konten";
-      teksAwalPesan = "Halo Nordik Lens, saya ingin menanyakan detail layanan Produksi Video & Konten.";
+      teksAwalPesan =
+        "Halo Nordik Lens, saya ingin menanyakan detail layanan Produksi Video & Konten.";
     } else if (layananParam.includes("web") || layananParam.includes("ui")) {
       nilaiTerpilih = "Desain Antarmuka & Web";
-      teksAwalPesan = "Halo Nordik Lens, saya ingin menanyakan detail layanan Desain Antarmuka & Web.";
+      teksAwalPesan =
+        "Halo Nordik Lens, saya ingin menanyakan detail layanan Desain Antarmuka & Web.";
     } else if (paketParam.includes("starter")) {
       nilaiTerpilih = "Paket Visual Starter";
-      teksAwalPesan = "Halo Nordik Lens, saya tertarik dengan Paket Visual Starter.";
+      teksAwalPesan =
+        "Halo Nordik Lens, saya tertarik dengan Paket Visual Starter.";
     } else if (paketParam.includes("brand")) {
       nilaiTerpilih = "Paket Brand & Web";
-      teksAwalPesan = "Halo Nordik Lens, saya tertarik dengan Paket Brand & Web.";
+      teksAwalPesan =
+        "Halo Nordik Lens, saya tertarik dengan Paket Brand & Web.";
     } else if (paketParam.includes("full") || paketParam.includes("studio")) {
       nilaiTerpilih = "Paket Full Studio";
-      teksAwalPesan = "Halo Nordik Lens, saya tertarik dengan Paket Full Studio.";
+      teksAwalPesan =
+        "Halo Nordik Lens, saya tertarik dengan Paket Full Studio.";
     }
 
     if (nilaiTerpilih) {
       const opsiCocok = Array.from(selectLayanan.options).find(function (opt) {
-        return opt.value.toLowerCase() === nilaiTerpilih.toLowerCase() || opt.text.toLowerCase() === nilaiTerpilih.toLowerCase();
+        return (
+          opt.value.toLowerCase() === nilaiTerpilih.toLowerCase() ||
+          opt.text.toLowerCase() === nilaiTerpilih.toLowerCase()
+        );
       });
       if (opsiCocok) {
         selectLayanan.value = opsiCocok.value;
@@ -209,13 +252,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const pilihan = selectLayanan ? selectLayanan.value : "Umum";
 
       if (!nama || !email || !pesan) {
-        statusPesan.textContent = "Harap lengkapi nama lengkap, alamat email, dan isi pesan terlebih dahulu.";
+        statusPesan.textContent =
+          "Harap lengkapi nama lengkap, alamat email, dan isi pesan terlebih dahulu.";
         statusPesan.className = "ghaysan_pesan_error";
         return;
       }
 
       statusPesan.textContent =
-        "Terima kasih, " + nama + ". Catatan pesan Anda (" + pilihan + ") telah tercatat pada formulir.";
+        "Terima kasih, " +
+        nama +
+        ". Catatan pesan Anda (" +
+        pilihan +
+        ") telah tercatat pada formulir.";
       statusPesan.className = "ghaysan_pesan_sukses";
       formKontak.reset();
     });
