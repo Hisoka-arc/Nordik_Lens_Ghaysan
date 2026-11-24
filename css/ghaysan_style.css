@@ -153,7 +153,8 @@ a {
   color: #DCE4DC;
 }
 
-#ghaysan_toggle_menu {
+#ghaysan_toggle_menu,
+.ghaysan_btn_menu {
   display: none;
   background-color: var(--ghaysan-aksen);
   color: var(--ghaysan-teks-aksen);
@@ -287,9 +288,9 @@ a {
   color: var(--ghaysan-utama);
 }
 
-a.ghaysan_btn_sekunder.ghaysan_btn_gelap {
-  display: block;
-  width: 100%;
+a.ghaysan_btn_sekunder.ghaysan_btn_gelap,
+button.ghaysan_btn_sekunder.ghaysan_btn_gelap {
+  display: inline-block;
   text-align: center;
   background-color: transparent;
   color: var(--ghaysan-utama);
@@ -297,7 +298,8 @@ a.ghaysan_btn_sekunder.ghaysan_btn_gelap {
   font-weight: 600;
 }
 
-a.ghaysan_btn_sekunder.ghaysan_btn_gelap:hover {
+a.ghaysan_btn_sekunder.ghaysan_btn_gelap:hover,
+button.ghaysan_btn_sekunder.ghaysan_btn_gelap:hover {
   background-color: var(--ghaysan-utama);
   color: var(--ghaysan-putih);
 }
@@ -429,14 +431,24 @@ a.ghaysan_btn_utama.ghaysan_btn_penuh {
 }
 
 /* Filter & Tabel */
-.ghaysan_filter_bar {
+.ghaysan_filter_bar,
+.ghaysan_porto_toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 24px;
 }
 
-.ghaysan_filter_btn {
+.ghaysan_filter_grup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ghaysan_filter_btn,
+.ghaysan_btn_filter {
   padding: 8px 16px;
   border-radius: 4px;
   border: 1px solid #C8C2B8;
@@ -450,7 +462,8 @@ a.ghaysan_btn_utama.ghaysan_btn_penuh {
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.ghaysan_filter_aktif {
+.ghaysan_filter_aktif,
+.ghaysan_btn_filter.aktif {
   background-color: var(--ghaysan-aksen);
   border-color: var(--ghaysan-aksen);
   color: var(--ghaysan-teks-aksen);
@@ -846,6 +859,10 @@ ul.ghaysan_fitur_list li::before {
   flex-direction: column;
 }
 
+.ghaysan_porto_desc {
+  margin-bottom: 16px;
+}
+
 .ghaysan_porto_meta {
   display: flex;
   justify-content: space-between;
@@ -854,7 +871,6 @@ ul.ghaysan_fitur_list li::before {
   font-size: 0.8rem;
   line-height: 1.4;
   color: var(--ghaysan-abu-teks);
-  margin-bottom: 8px;
 }
 
 .ghaysan_porto_footer {
@@ -868,6 +884,8 @@ ul.ghaysan_fitur_list li::before {
 }
 
 .ghaysan_porto_tag {
+  display: inline-block;
+  align-self: flex-start;
   font-size: 0.78rem;
   font-weight: 600;
   line-height: 1.2;
@@ -918,7 +936,8 @@ ul.ghaysan_fitur_list li::before {
   justify-content: center;
 }
 
-.ghaysan_modal.ghaysan_modal_buka {
+.ghaysan_modal.ghaysan_modal_buka,
+.ghaysan_modal.aktif {
   display: flex;
 }
 
@@ -991,6 +1010,12 @@ ul.ghaysan_fitur_list li::before {
   line-height: 1.65;
 }
 
+.ghaysan_modal_aksi {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* Footer */
 #ghaysan_footer {
   background-color: var(--ghaysan-utama);
@@ -1038,7 +1063,8 @@ ul.ghaysan_fitur_list li::before {
 }
 
 @media (max-width: 820px) {
-  #ghaysan_toggle_menu {
+  #ghaysan_toggle_menu,
+  .ghaysan_btn_menu {
     display: inline-block;
   }
 
@@ -1056,7 +1082,8 @@ ul.ghaysan_fitur_list li::before {
     border-bottom: 2px solid var(--ghaysan-aksen);
   }
 
-  .ghaysan_menu_buka {
+  .ghaysan_menu.ghaysan_menu_buka,
+  .ghaysan_menu.buka {
     display: flex;
   }
 
